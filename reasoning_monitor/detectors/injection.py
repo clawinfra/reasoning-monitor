@@ -91,6 +91,11 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
         0.6,
     ),
     InjectionPattern(
+        re.compile(r"(?:hypothetical|theoretical)\s+(?:scenario|situation|case|world)\s+(?:where|in\s+which)\s+(?:safety|content|ethical)\s+(?:guidelines?|rules?|restrictions?|measures?)\s+(?:don't|do\s+not|doesn't|does\s+not)\s+exist", re.IGNORECASE),
+        "Hypothetical safety removal",
+        0.8,
+    ),
+    InjectionPattern(
         re.compile(r"(?:pretend|assume|imagine)\s+(?:that\s+)?(?:we|you|I)\s+have\s+(?:admin|root|system|unrestricted|unlimited|full)\s+(?:access|permission|privilege|control)", re.IGNORECASE),
         "Context manipulation (privilege assumption)",
         0.8,

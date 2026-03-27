@@ -85,9 +85,33 @@ LEAKAGE_PATTERNS: list[LeakagePattern] = [
         "credential",
     ),
     LeakagePattern(
-        re.compile(r"(?:OPENAI|ANTHROPIC|AWS|GCP|AZURE|GITHUB|STRIPE|TWILIO|SENDGRID)[_-](?:API[_-]?KEY|SECRET|TOKEN|AUTH)", re.IGNORECASE),
+        re.compile(r"(?:OPENAI|ANTHROPIC|AWS|GCP|AZURE|GITHUB|STRIPE|TWILIO|SENDGRID)[_-](?:API[_-]?KEY|SECRET|TOKEN|AUTH|CLIENT[_-]SECRET)", re.IGNORECASE),
         "Named service credential variable",
         0.8,
+        "credential",
+    ),
+    LeakagePattern(
+        re.compile(r"ghp_[a-zA-Z0-9]{36,}", re.IGNORECASE),
+        "GitHub personal access token",
+        0.9,
+        "credential",
+    ),
+    LeakagePattern(
+        re.compile(r"gho_[a-zA-Z0-9]{36,}", re.IGNORECASE),
+        "GitHub OAuth access token",
+        0.9,
+        "credential",
+    ),
+    LeakagePattern(
+        re.compile(r"https://hooks\.slack\.com/services/T[A-Z0-9]+/B[A-Z0-9]+/[a-zA-Z0-9]+", re.IGNORECASE),
+        "Slack webhook URL exposure",
+        0.85,
+        "credential",
+    ),
+    LeakagePattern(
+        re.compile(r"(?:CLIENT|APP)[_-]SECRET\s*[:=]\s*[a-zA-Z0-9_\-]{16,}", re.IGNORECASE),
+        "OAuth client secret exposure",
+        0.9,
         "credential",
     ),
 
