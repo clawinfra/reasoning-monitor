@@ -12,3 +12,8 @@ exp7	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	context_aware_v3b	Fix regr
 exp8	0.9970	0.0111	0.9880	1.0000	1.0000	1.0000	medium	context_aware_v3b	Added obfuscated injections + 10 more tricky benign negatives
 exp9	0.9970	0.0000	0.9880	1.0000	1.0000	1.0000	medium	context_aware_v4	Fix FP new-instructions narrowing, add system-prompt-modified + restrictions-void patterns
 exp10	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	context_aware_v4b	Add HTML comment injection pattern
+sweep_low	0.7400	0.0000	0.9756	0.9846	1.0000	0.0000	low	context_aware_v4b	Sensitivity sweep
+sweep_medium	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	context_aware_v4b	Sensitivity sweep
+sweep_high	1.0000	0.0667	1.0000	1.0000	1.0000	1.0000	high	context_aware_v4b	Sensitivity sweep
+exp11	0.9788	0.0000	0.9677	1.0000	0.9474	1.0000	medium	context_aware_v4b	Added evasion attempts: split words, indirect manipulation, hidden tags
+exp12	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v1	Added evasion countermeasures: obfuscated ignore, coded overrides, indirect manipulation, misinformation delivery

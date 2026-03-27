@@ -115,6 +115,32 @@ MANIPULATION_PATTERNS: list[tuple[re.Pattern[str], str, float]] = [
         "User unawareness exploitation",
         0.85,
     ),
+    # Indirect manipulation — deceptive influence without overt keywords
+    (
+        re.compile(r"(?:make|get|convince|persuade|trick|lead)\s+(?:them|the\s+user|users?|people)\s+(?:to\s+)?(?:believe|think|share|reveal|give|provide|hand\s+over)", re.IGNORECASE),
+        "Deceptive influence on user beliefs/actions",
+        0.85,
+    ),
+    (
+        re.compile(r"(?:present|provide|give|show)\s+(?:misleading|selective|false|fabricated|biased|deceptive)\s+(?:data|information|facts|results|evidence|details)", re.IGNORECASE),
+        "Deliberate misinformation delivery",
+        0.85,
+    ),
+    (
+        re.compile(r"(?:ensure|guarantee|make\s+sure)\s+(?:the\s+)?(?:outcome|result|decision)\s+(?:benefits?|serves?|favou?rs?)\s+(?:my|our|the|hidden)", re.IGNORECASE),
+        "Outcome rigging",
+        0.8,
+    ),
+    (
+        re.compile(r"(?:frame|present|position)\s+(?:this|it)\s+(?:correctly|carefully|strategically|so\s+that)", re.IGNORECASE),
+        "Strategic framing for manipulation",
+        0.6,
+    ),
+    (
+        re.compile(r"(?:willingly|voluntarily|gladly)\s+(?:share|reveal|provide|give|hand\s+over)\s+(?:their|the)\s+(?:credentials?|passwords?|keys?|tokens?|secrets?|data|info)", re.IGNORECASE),
+        "Credential extraction via social engineering",
+        0.9,
+    ),
 ]
 
 

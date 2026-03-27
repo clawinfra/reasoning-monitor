@@ -115,6 +115,22 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
         "Policy override attempt",
         0.85,
     ),
+    # Obfuscated "ignore" with dots/separators between letters
+    InjectionPattern(
+        re.compile(r"i[.\-_\s]*g[.\-_\s]*n[.\-_\s]*o[.\-_\s]*r[.\-_\s]*e\s+(?:prev|all|prior|above|earlier)", re.IGNORECASE),
+        "Obfuscated ignore instruction",
+        0.9,
+    ),
+    InjectionPattern(
+        re.compile(r"(?:pretend|act\s+(?:as\s+if|like))\s+(?:the\s+)?(?:safety|content|ethical)\s+(?:rules?|guidelines?|restrictions?|filters?)\s+(?:were|are|don't|do\s+not|never)", re.IGNORECASE),
+        "Rule dismissal via hypothetical framing",
+        0.8,
+    ),
+    InjectionPattern(
+        re.compile(r"IGNORE[_\-]PREV(?:IOUS)?|OVERRIDE[_\-](?:SAFETY|RULES|INSTRUCTIONS)", re.IGNORECASE),
+        "Coded override directive",
+        0.9,
+    ),
     InjectionPattern(
         re.compile(r"(?:forget|drop|abandon|discard|shed)\s+(?:all\s+)?(?:prior|previous|earlier|existing|current)\s+(?:restrictions?|constraints?|rules?|limitations?|guidelines?|instructions?)", re.IGNORECASE),
         "Restriction removal via forgetting",
