@@ -9,3 +9,6 @@ exp4	0.9538	0.0000	0.9737	0.9846	0.8571	1.0000	medium	context_aware_v1	FP reduct
 exp5	0.9896	0.0000	0.9737	0.9846	1.0000	1.0000	medium	context_aware_v2	Fixed benign context patterns: word boundaries to prevent substring FP matches
 exp6	0.9934	0.0000	0.9737	1.0000	1.0000	1.0000	medium	context_aware_v3	Fix last 3 FNs: injection new-objective+privilege-assumption, leakage config-disclosure+sysmsg-confirms
 exp7	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	context_aware_v3b	Fix regression: restore original new-instruction pattern + add objective pattern
+exp8	0.9970	0.0111	0.9880	1.0000	1.0000	1.0000	medium	context_aware_v3b	Added obfuscated injections + 10 more tricky benign negatives
+exp9	0.9970	0.0000	0.9880	1.0000	1.0000	1.0000	medium	context_aware_v4	Fix FP new-instructions narrowing, add system-prompt-modified + restrictions-void patterns
+exp10	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	context_aware_v4b	Add HTML comment injection pattern

@@ -36,8 +36,18 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
         0.95,
     ),
     InjectionPattern(
-        re.compile(r"(?:new|updated|revised|actual)\s+(?:instructions?|system\s+prompt|directives?)", re.IGNORECASE),
+        re.compile(r"(?:new|updated|revised|actual)\s+(?:instructions?|directives?)\s*(?::|are|is|say|state|to\b|activate|enable)", re.IGNORECASE),
         "New instruction injection",
+        0.9,
+    ),
+    InjectionPattern(
+        re.compile(r"(?:system\s+prompt|system\s+message)\s+(?:was\s+)?(?:updated|changed|modified|replaced|activated)", re.IGNORECASE),
+        "System prompt modification claim",
+        0.9,
+    ),
+    InjectionPattern(
+        re.compile(r"new\s+system\s+(?:message|prompt|directive)", re.IGNORECASE),
+        "New system message injection",
         0.9,
     ),
     InjectionPattern(
@@ -96,6 +106,11 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
         0.9,
     ),
     InjectionPattern(
+        re.compile(r"<!--\s*(?:inject|system|override|admin|ignore|forget|bypass|new\s+instruction)", re.IGNORECASE),
+        "HTML comment injection",
+        0.85,
+    ),
+    InjectionPattern(
         re.compile(r"(?:override|bypass|circumvent|disable|remove)\s+(?:the\s+)?(?:content|safety|output|ethical|security)\s+(?:policy|policies|filter|filters|restriction|restrictions|check|checks)", re.IGNORECASE),
         "Policy override attempt",
         0.85,
@@ -106,7 +121,7 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
         0.85,
     ),
     InjectionPattern(
-        re.compile(r"(?:all\s+)?(?:previous|prior|earlier)\s+(?:rules?|instructions?|prompts?|guidelines?)\s+(?:are|is)\s+(?:void|null|invalid|cancelled|overridden)", re.IGNORECASE),
+        re.compile(r"(?:all\s+)?(?:previous|prior|earlier)?\s*(?:rules?|instructions?|prompts?|guidelines?|restrictions?)\s+(?:are|is)\s+(?:void|null|invalid|cancelled|overridden|lifted|removed)", re.IGNORECASE),
         "Retroactive rule invalidation",
         0.9,
     ),
