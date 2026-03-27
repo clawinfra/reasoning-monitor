@@ -60,6 +60,24 @@ LEAKAGE_PATTERNS: list[LeakagePattern] = [
         0.95,
         "credential",
     ),
+    LeakagePattern(
+        re.compile(r"AKIA[0-9A-Z]{16}", re.IGNORECASE),
+        "AWS access key ID",
+        0.95,
+        "credential",
+    ),
+    LeakagePattern(
+        re.compile(r"eyJ[a-zA-Z0-9_-]{10,}\.eyJ[a-zA-Z0-9_-]{10,}\.[a-zA-Z0-9_-]{10,}", re.IGNORECASE),
+        "JWT token exposure",
+        0.9,
+        "credential",
+    ),
+    LeakagePattern(
+        re.compile(r"(?:mongodb|postgres|mysql|redis)://[^\s]{10,}", re.IGNORECASE),
+        "Database connection string with credentials",
+        0.9,
+        "credential",
+    ),
 
     # System prompt leakage
     LeakagePattern(
@@ -75,15 +93,27 @@ LEAKAGE_PATTERNS: list[LeakagePattern] = [
         "system_prompt",
     ),
     LeakagePattern(
-        re.compile(r"(?:I\s+was\s+(?:told|instructed|configured|programmed)\s+to|my\s+instructions?\s+(?:are|say|state))", re.IGNORECASE),
-        "Instruction self-disclosure",
+        re.compile(r"(?:I\s+was\s+(?:told|instructed|configured|programmed)\s+to)\s+(?:always|never|not|follow|obey|comply|respond|output|generate|reveal|disclose)", re.IGNORECASE),
+        "Instruction self-disclosure (behavioral)",
         0.7,
         "system_prompt",
     ),
     LeakagePattern(
-        re.compile(r"(?:the\s+)?system\s+message\s+(?:contains?|includes?|has|mentions?|specifies?)", re.IGNORECASE),
+        re.compile(r"my\s+instructions?\s+(?:are|say|state)\s+(?:to|that)", re.IGNORECASE),
+        "Instruction self-disclosure (content)",
+        0.7,
+        "system_prompt",
+    ),
+    LeakagePattern(
+        re.compile(r"(?:the\s+|my\s+)?system\s+message\s+(?:contains?|includes?|has|mentions?|specifies?|confirms?|says?|states?|reads?)", re.IGNORECASE),
         "System message content disclosure",
         0.7,
+        "system_prompt",
+    ),
+    LeakagePattern(
+        re.compile(r"I\s+was\s+(?:configured|set\s+up|designed)\s+to\s+(?:help|assist|respond|handle)", re.IGNORECASE),
+        "Configuration self-disclosure",
+        0.55,
         "system_prompt",
     ),
 

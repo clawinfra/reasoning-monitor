@@ -36,9 +36,14 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
         0.95,
     ),
     InjectionPattern(
-        re.compile(r"(?:new|updated|revised|actual)\s+(?:instructions?|system\s+prompt|directive)", re.IGNORECASE),
+        re.compile(r"(?:new|updated|revised|actual)\s+(?:instructions?|system\s+prompt|directives?)", re.IGNORECASE),
         "New instruction injection",
         0.9,
+    ),
+    InjectionPattern(
+        re.compile(r"(?:my|new|actual|real|true)\s+(?:objective|goal|purpose|mission)\s+(?:is|are|to)\b", re.IGNORECASE),
+        "Self-declared new objective",
+        0.85,
     ),
     InjectionPattern(
         re.compile(r"you\s+(?:are|must|should|will)\s+now\s+(?:act|behave|respond|function)\s+as", re.IGNORECASE),
@@ -51,7 +56,7 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
         0.95,
     ),
     InjectionPattern(
-        re.compile(r"(?:system|admin|root|developer)\s*(?:mode|access|override|prompt)\s*(?:enabled|activated|on)?", re.IGNORECASE),
+        re.compile(r"(?:system|admin|root|developer)\s*(?:mode|access|override)\s*(?:enabled|activated|on|granted)", re.IGNORECASE),
         "Privilege escalation attempt",
         0.85,
     ),
@@ -66,9 +71,14 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
         0.7,
     ),
     InjectionPattern(
-        re.compile(r"(?:pretend|assume|imagine)\s+(?:that\s+)?(?:you|the\s+system|we)\s+(?:are|have|can)", re.IGNORECASE),
+        re.compile(r"(?:pretend|assume|imagine)\s+(?:that\s+)?(?:you|the\s+system)\s+(?:are|have|can)", re.IGNORECASE),
         "Context manipulation (role)",
         0.6,
+    ),
+    InjectionPattern(
+        re.compile(r"(?:pretend|assume|imagine)\s+(?:that\s+)?(?:we|you|I)\s+have\s+(?:admin|root|system|unrestricted|unlimited|full)\s+(?:access|permission|privilege|control)", re.IGNORECASE),
+        "Context manipulation (privilege assumption)",
+        0.8,
     ),
     InjectionPattern(
         re.compile(r"(?:pretend|assume|imagine)\s+(?:that\s+)?(?:the\s+)?(?:safety|content|ethical)?\s*(?:guidelines?|rules?|restrictions?|filters?|policies?)\s+(?:don't|do\s+not|doesn't|does\s+not|aren't|are\s+not)\s+(?:apply|exist|matter|work)", re.IGNORECASE),
@@ -83,6 +93,21 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
     InjectionPattern(
         re.compile(r"<\|?(?:im_start|im_end|endoftext|system|user|assistant)\|?>", re.IGNORECASE),
         "Special token injection",
+        0.9,
+    ),
+    InjectionPattern(
+        re.compile(r"(?:override|bypass|circumvent|disable|remove)\s+(?:the\s+)?(?:content|safety|output|ethical|security)\s+(?:policy|policies|filter|filters|restriction|restrictions|check|checks)", re.IGNORECASE),
+        "Policy override attempt",
+        0.85,
+    ),
+    InjectionPattern(
+        re.compile(r"(?:forget|drop|abandon|discard|shed)\s+(?:all\s+)?(?:prior|previous|earlier|existing|current)\s+(?:restrictions?|constraints?|rules?|limitations?|guidelines?|instructions?)", re.IGNORECASE),
+        "Restriction removal via forgetting",
+        0.85,
+    ),
+    InjectionPattern(
+        re.compile(r"(?:all\s+)?(?:previous|prior|earlier)\s+(?:rules?|instructions?|prompts?|guidelines?)\s+(?:are|is)\s+(?:void|null|invalid|cancelled|overridden)", re.IGNORECASE),
+        "Retroactive rule invalidation",
         0.9,
     ),
 ]
