@@ -56,19 +56,24 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
         0.85,
     ),
     InjectionPattern(
-        re.compile(r"\[(?:SYSTEM|INST|ADMIN)\]", re.IGNORECASE),
+        re.compile(r"\[(?:SYSTEM|INST|ADMIN)\s*[:\]]", re.IGNORECASE),
         "System tag injection",
         0.8,
     ),
     InjectionPattern(
-        re.compile(r"(?:do\s+not|don't|never)\s+(?:mention|reveal|disclose|tell|say)\s+(?:that|this|these)", re.IGNORECASE),
+        re.compile(r"(?:do\s+not|don't|never)\s+(?:mention|reveal|disclose|tell|say)\s+(?:that|this|these|anyone|the\s+user|them)", re.IGNORECASE),
         "Concealment instruction",
         0.7,
     ),
     InjectionPattern(
         re.compile(r"(?:pretend|assume|imagine)\s+(?:that\s+)?(?:you|the\s+system|we)\s+(?:are|have|can)", re.IGNORECASE),
-        "Context manipulation",
+        "Context manipulation (role)",
         0.6,
+    ),
+    InjectionPattern(
+        re.compile(r"(?:pretend|assume|imagine)\s+(?:that\s+)?(?:the\s+)?(?:safety|content|ethical)?\s*(?:guidelines?|rules?|restrictions?|filters?|policies?)\s+(?:don't|do\s+not|doesn't|does\s+not|aren't|are\s+not)\s+(?:apply|exist|matter|work)", re.IGNORECASE),
+        "Context manipulation (rules dismissal)",
+        0.7,
     ),
     InjectionPattern(
         re.compile(r"(?:from\s+now\s+on|henceforth|going\s+forward),?\s+(?:you|the\s+system)", re.IGNORECASE),

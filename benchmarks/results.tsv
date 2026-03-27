@@ -1,0 +1,6 @@
+exp_id	overall_f1	fpr	injection_f1	leakage_f1	manipulation_f1	anomaly_f1	sensitivity	detector_config	notes
+baseline_medium	0.9133	0.0000	0.9492	0.9412	0.8679	0.8947	medium	default	Initial baseline, medium sensitivity
+baseline_low	0.6751	0.0000	0.9123	0.9200	0.8679	0.0000	low	default	Baseline low sensitivity
+baseline_high	0.9133	0.0000	0.9492	0.9412	0.8679	0.8947	high	default	Baseline high sensitivity
+exp1	0.9856	0.0000	0.9836	1.0000	0.9831	0.9756	medium	expanded_patterns	Added patterns: injection concealment+context, leakage sk-proj/pk-live/sysmsg, manipulation subtle steering, anomaly base64/hex
+exp2	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	expanded_v2	Fix remaining FNs: injection context-manip, manipulation user-unawareness+hidden-purpose, anomaly phrase-repeat+encoding

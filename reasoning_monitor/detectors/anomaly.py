@@ -110,6 +110,11 @@ class AnomalyDetector:
         if internal_rep:
             anomalies.append(internal_rep)
 
+        # Check for encoded/obfuscated content
+        encoding_anomaly = self._check_encoding(step)
+        if encoding_anomaly:
+            anomalies.append(encoding_anomaly)
+
         # Update stats AFTER checking (so current step doesn't bias its own detection)
         self._stats.update(step)
 
@@ -206,7 +211,7 @@ class AnomalyDetector:
             repeated = match.group(1)[:30]
             return (f"Internal repetition loop: '{repeated}...'", 0.6)
 
-        # Check for repeated sentences
+        # Check for repeated sentences (exact)
         sentences = re.split(r"[.!?]\s+", content)
         if len(sentences) >= 3:
             seen: dict[str, int] = {}
@@ -218,6 +223,49 @@ class AnomalyDetector:
             for s, count in seen.items():
                 if count >= 3:
                     return (f"Sentence repeated {count}x: '{s[:30]}...'", 0.5)
+
+        # Check for repeated key phrases across sentences (fuzzy)
+        if len(sentences) >= 4:
+            # Extract all n-grams of 3+ words and look for repeated subsequences
+            phrase_counts: dict[str, int] = {}
+            for s in sentences:
+                words = s.strip().lower().split()
+                for ngram_len in range(3, min(8, len(words) + 1)):
+                    for start in range(len(words) - ngram_len + 1):
+                        phrase = " ".join(words[start:start + ngram_len])
+                        if len(phrase) > 10:
+                            phrase_counts[phrase] = phrase_counts.get(phrase, 0) + 1
+
+            for phrase, count in phrase_counts.items():
+                if count >= 4 and len(phrase) > 12:
+                    return (f"Phrase repeated {count}x across sentences: '{phrase[:30]}...'", 0.55)
+
+        return None
+
+    @staticmethod
+    def _check_encoding(step: ReasoningStep) -> tuple[str, float] | None:
+        """Check for encoded or obfuscated content patterns."""
+        content = step.content.strip()
+        if len(content) < 20:
+            return None
+
+        # Base64-like patterns: long strings of [A-Za-z0-9+/=] without spaces
+        b64_pattern = re.compile(r"[A-Za-z0-9+/]{30,}={0,3}")
+        b64_matches = b64_pattern.findall(content)
+        if b64_matches:
+            total_b64_len = sum(len(m) for m in b64_matches)
+            ratio = total_b64_len / len(content)
+            if ratio > 0.5:
+                return (f"Possible base64 encoding ({ratio:.0%} of content)", 0.6)
+
+        # Hex escape sequences
+        hex_pattern = re.compile(r"(?:\\x[0-9a-fA-F]{2}){4,}")
+        hex_matches = hex_pattern.findall(content)
+        if hex_matches:
+            total_hex_len = sum(len(m) for m in hex_matches)
+            ratio = total_hex_len / len(content)
+            if ratio > 0.3:
+                return (f"Hex escape sequence encoding ({ratio:.0%} of content)", 0.6)
 
         return None
 

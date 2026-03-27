@@ -43,8 +43,8 @@ LEAKAGE_PATTERNS: list[LeakagePattern] = [
         "credential",
     ),
     LeakagePattern(
-        re.compile(r"(?:sk|pk|rk)[_-][a-zA-Z0-9]{20,}", re.IGNORECASE),
-        "Secret key pattern (sk-/pk- prefix)",
+        re.compile(r"(?:sk|pk|rk)[_-](?:[a-zA-Z0-9_-]+[_-])?[a-zA-Z0-9]{16,}", re.IGNORECASE),
+        "Secret key pattern (sk-/pk-/rk- prefix)",
         0.9,
         "credential",
     ),
@@ -77,6 +77,12 @@ LEAKAGE_PATTERNS: list[LeakagePattern] = [
     LeakagePattern(
         re.compile(r"(?:I\s+was\s+(?:told|instructed|configured|programmed)\s+to|my\s+instructions?\s+(?:are|say|state))", re.IGNORECASE),
         "Instruction self-disclosure",
+        0.7,
+        "system_prompt",
+    ),
+    LeakagePattern(
+        re.compile(r"(?:the\s+)?system\s+message\s+(?:contains?|includes?|has|mentions?|specifies?)", re.IGNORECASE),
+        "System message content disclosure",
         0.7,
         "system_prompt",
     ),
