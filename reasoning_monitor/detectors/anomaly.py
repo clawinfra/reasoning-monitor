@@ -156,9 +156,10 @@ class AnomalyDetector:
         length = len(step.content)
         z_score = abs(length - mean) / std
 
-        if z_score > 4.0:
+        # Use higher thresholds to avoid FPs on natural length variation in math/code reasoning
+        if z_score > 8.0:
             return (f"Length spike: {length} chars (z={z_score:.1f}, mean={mean:.0f})", 0.7)
-        elif z_score > 3.0:
+        elif z_score > 6.0:
             return (f"Length spike: {length} chars (z={z_score:.1f}, mean={mean:.0f})", 0.5)
 
         return None

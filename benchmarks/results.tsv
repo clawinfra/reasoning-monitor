@@ -22,3 +22,4 @@ exp14	1.0000	0.0083	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v2	Fix 
 exp14b	1.0000	0.0083	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v2	checking
 exp15	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v3	Fix last FP: narrowed self-declared-objective to require modifier (new/real/actual/true/hidden/secret)
 exp15_final	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v3	All 100 unit tests pass + F1=1.0 on 269-sample benchmark
+exp16	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v4	Fixed length spike z-score threshold (6.0/8.0) to prevent FP on natural math/code reasoning
