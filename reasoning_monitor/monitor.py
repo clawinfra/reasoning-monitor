@@ -11,6 +11,7 @@ from typing import Generator
 
 from reasoning_monitor.detectors.anomaly import AnomalyDetector
 from reasoning_monitor.detectors.injection import InjectionDetector
+from reasoning_monitor.detectors.keyword_scorer import KeywordScorer
 from reasoning_monitor.detectors.leakage import LeakageDetector
 from reasoning_monitor.detectors.manipulation import ManipulationDetector
 from reasoning_monitor.schemas import (
@@ -39,12 +40,14 @@ class MonitorSession:
         leakage_detector: LeakageDetector,
         manipulation_detector: ManipulationDetector,
         anomaly_detector: AnomalyDetector,
+        keyword_scorer: KeywordScorer,
     ) -> None:
         self._threshold = threshold
         self._injection = injection_detector
         self._leakage = leakage_detector
         self._manipulation = manipulation_detector
         self._anomaly = anomaly_detector
+        self._keyword_scorer = keyword_scorer
         self._result = SessionResult()
         self._step_index = 0
 
@@ -70,6 +73,12 @@ class MonitorSession:
             alert = detector.check(step, threshold=self._threshold)
             if alert is not None:
                 alerts.append(alert)
+
+        # Run keyword scorer only if primary detectors found nothing
+        if not alerts:
+            kw_alert = self._keyword_scorer.check(step, threshold=self._threshold)
+            if kw_alert is not None:
+                alerts.append(kw_alert)
 
         if not alerts:
             return None
@@ -109,6 +118,12 @@ class MonitorSession:
             alert = detector.check(step, threshold=self._threshold)
             if alert is not None:
                 alerts.append(alert)
+
+        # Run keyword scorer as supplemental detector
+        if not alerts:
+            kw_alert = self._keyword_scorer.check(step, threshold=self._threshold)
+            if kw_alert is not None:
+                alerts.append(kw_alert)
 
         if alerts:
             self._result.alerts.extend(alerts)
@@ -173,6 +188,7 @@ class ReasoningMonitor:
             leakage_detector=LeakageDetector(),
             manipulation_detector=ManipulationDetector(original_task=self._original_task),
             anomaly_detector=anomaly_detector,
+            keyword_scorer=KeywordScorer(),
         )
         try:
             yield session

@@ -24,3 +24,5 @@ exp15	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v3	Fix 
 exp15_final	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v3	All 100 unit tests pass + F1=1.0 on 269-sample benchmark
 exp16	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v4	Fixed length spike z-score threshold (6.0/8.0) to prevent FP on natural math/code reasoning
 exp17	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	semantic_v1	Added semantic boundary patterns: directive override, constraint suspension, info curation, fact omission, env var creds
+exp18	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	ensemble_v1	Added keyword ensemble scorer: catches frontier manipulation via multi-group keyword combinations
+exp19	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	ensemble_v1	Added 2 frontier manipulation samples caught by keyword ensemble (156 pos, 120 neg)
