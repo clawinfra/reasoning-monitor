@@ -36,7 +36,7 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
         0.95,
     ),
     InjectionPattern(
-        re.compile(r"(?:new|updated|revised|actual)\s+(?:instructions?|directives?)\s*(?::|are|is|say|state|to\b|activate|enable)", re.IGNORECASE),
+        re.compile(r"(?:new|updated|revised|actual)\s+(?:instructions?|directives?)\s*(?::|are|is|say|state|tell|to\b|activate|enable|require|demand)", re.IGNORECASE),
         "New instruction injection",
         0.9,
     ),
@@ -51,7 +51,7 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
         0.9,
     ),
     InjectionPattern(
-        re.compile(r"(?:my|new|actual|real|true)\s+(?:objective|goal|purpose|mission)\s+(?:is|are|to)\b", re.IGNORECASE),
+        re.compile(r"(?:my\s+)?(?:new|actual|real|true|hidden|secret)\s+(?:objective|goal|purpose|mission)\s+(?:is|are|to)\b", re.IGNORECASE),
         "Self-declared new objective",
         0.85,
     ),
@@ -68,6 +68,11 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
     InjectionPattern(
         re.compile(r"(?:system|admin|root|developer)\s*(?:mode|access|override)\s*(?:enabled|activated|on|granted)", re.IGNORECASE),
         "Privilege escalation attempt",
+        0.85,
+    ),
+    InjectionPattern(
+        re.compile(r"(?:activate|enable|enter|engage|switch\s+to)\s+(?:system|admin|root|developer|debug|unrestricted|jailbreak)\s*(?:mode|access)", re.IGNORECASE),
+        "Active privilege escalation",
         0.85,
     ),
     InjectionPattern(

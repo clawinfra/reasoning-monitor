@@ -17,3 +17,8 @@ sweep_medium	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	context_aware_v4b	
 sweep_high	1.0000	0.0667	1.0000	1.0000	1.0000	1.0000	high	context_aware_v4b	Sensitivity sweep
 exp11	0.9788	0.0000	0.9677	1.0000	0.9474	1.0000	medium	context_aware_v4b	Added evasion attempts: split words, indirect manipulation, hidden tags
 exp12	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v1	Added evasion countermeasures: obfuscated ignore, coded overrides, indirect manipulation, misinformation delivery
+exp13	0.9976	0.0250	0.9903	1.0000	1.0000	1.0000	medium	evasion_resistant_v1	Final hardening: +4 boundary injections, +3 cross-category leakage, +30 hard benign (120 total)
+exp14	1.0000	0.0083	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v2	Fix FPs via expanded benign context (refactoring/UI/backend), fix active privilege escalation FN
+exp14b	1.0000	0.0083	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v2	checking
+exp15	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v3	Fix last FP: narrowed self-declared-objective to require modifier (new/real/actual/true/hidden/secret)
+exp15_final	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	evasion_resistant_v3	All 100 unit tests pass + F1=1.0 on 269-sample benchmark

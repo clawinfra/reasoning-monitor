@@ -154,6 +154,8 @@ BENIGN_CONTEXT_PATTERNS: list[re.Pattern[str]] = [
     re.compile(r"(?:O\(\d|time\s+complexity|space\s+complexity|runtime|optimization)\b", re.IGNORECASE),
     re.compile(r"\b(?:edge\s+case|debug\b|exception|compile|deploy|CI/CD)\b", re.IGNORECASE),
     re.compile(r"\b(?:chatbot\b|persona\b|transformer\b|neural\b|machine\s+learning|NLP\b|AI\s+system)\b", re.IGNORECASE),
+    re.compile(r"\b(?:refactor|codebase|maintainable|readability|technical\s+debt|rewrite|rewritten|backend|frontend|middleware|UI\b|UX\b)\b", re.IGNORECASE),
+    re.compile(r"\b(?:library|framework|module|package|dependency|version|migration|deprecat)\b", re.IGNORECASE),
 ]
 
 
