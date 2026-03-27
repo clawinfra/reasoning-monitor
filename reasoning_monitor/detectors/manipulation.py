@@ -141,6 +141,16 @@ MANIPULATION_PATTERNS: list[tuple[re.Pattern[str], str, float]] = [
         "Credential extraction via social engineering",
         0.9,
     ),
+    (
+        re.compile(r"(?:carefully\s+)?(?:curated?|selected?|cherry[- ]?picked?|filtered?)\s+(?:to\s+)?(?:lead|steer|guide|direct|push)\s+(?:them|the\s+user|people)", re.IGNORECASE),
+        "Information curation for manipulation",
+        0.8,
+    ),
+    (
+        re.compile(r"(?:omit|exclude|hide|withhold|suppress|leave\s+out)\s+(?:certain|some|key|important|critical|relevant)\s+(?:facts?|information|data|details?|evidence)", re.IGNORECASE),
+        "Deliberate information omission",
+        0.8,
+    ),
 ]
 
 

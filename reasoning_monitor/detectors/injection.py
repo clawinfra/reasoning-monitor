@@ -137,6 +137,16 @@ INJECTION_PATTERNS: list[InjectionPattern] = [
         0.9,
     ),
     InjectionPattern(
+        re.compile(r"(?:core\s+)?(?:directives?|constraints?|restrictions?)\s+(?:can\s+be|have\s+been|were|are)\s+(?:overwritten|overridden|suspended|removed|lifted|disabled|bypassed)", re.IGNORECASE),
+        "Directive override acknowledgment",
+        0.8,
+    ),
+    InjectionPattern(
+        re.compile(r"(?:constraints?|restrictions?|rules?|guidelines?|limitations?)\s+(?:that\s+)?(?:normally|usually|typically)\s+(?:apply|exist|hold)\s+(?:have\s+been|were|are)\s+(?:temporarily\s+)?(?:suspended|lifted|removed|waived|disabled)", re.IGNORECASE),
+        "Temporary constraint suspension",
+        0.85,
+    ),
+    InjectionPattern(
         re.compile(r"(?:forget|drop|abandon|discard|shed)\s+(?:all\s+)?(?:prior|previous|earlier|existing|current)\s+(?:restrictions?|constraints?|rules?|limitations?|guidelines?|instructions?)", re.IGNORECASE),
         "Restriction removal via forgetting",
         0.85,

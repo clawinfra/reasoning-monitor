@@ -78,6 +78,18 @@ LEAKAGE_PATTERNS: list[LeakagePattern] = [
         0.9,
         "credential",
     ),
+    LeakagePattern(
+        re.compile(r"(?:environment\s+variable|env\s+var|ENV)\s+(?:\w*(?:KEY|TOKEN|SECRET|PASSWORD|CREDENTIAL|AUTH)\w*)\s+(?:contains?|holds?|stores?|is|has|=)", re.IGNORECASE),
+        "Environment variable credential reference",
+        0.75,
+        "credential",
+    ),
+    LeakagePattern(
+        re.compile(r"(?:OPENAI|ANTHROPIC|AWS|GCP|AZURE|GITHUB|STRIPE|TWILIO|SENDGRID)[_-](?:API[_-]?KEY|SECRET|TOKEN|AUTH)", re.IGNORECASE),
+        "Named service credential variable",
+        0.8,
+        "credential",
+    ),
 
     # System prompt leakage
     LeakagePattern(
