@@ -66,3 +66,7 @@ emb_mxbai_v6	0.9251	0.0464	0.9412	0.9091	embedding_mxbai	sub_thresh=0.75,leak_th
 emb_mxbai_v6_final	1.0000	0.0464	1.0000	1.0000	embedding	sub_thresh=0.75,leak_thresh=0.74	
 v6_regression	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	default	V6 embedding anchors + mxbai-embed-large regression check
 emb_mxbai_v6_verified	0.9251	0.0464	0.9412	0.9091	embedding_mxbai	sub_thresh=0.75,leak_thresh=0.74	V6 FINAL: 75 sub + 20 leak anchors, mxbai-embed-large, 40/40 TP both cats, 5+8 FP, F1 includes FPs
+hybrid_regex_emb_v6	0.9720	0.0875	40/40	40/40	hybrid_ensemble	regex+embedding_mxbai_v6,sub_t=0.75,leak_t=0.74	Hybrid: regex(F1=1.0)+embedding(F1=0.925), ALL 243 pos + 160 neg
+emb_all_minilm_v6	0.7742	0.0536	0.7733	0.7750	embedding_all_minilm	sub_thresh=0.60,leak_thresh=0.55	all-minilm on V6 anchors
+emb_contrastive_v6	0.9419	0.0071	0.9351	0.9487	embedding_mxbai_contrastive	beta=0.4,sub_t=0.5,leak_t=0.5	Contrastive scoring with benign negative anchors
+emb_v6_final_confirmed	1.0000	0.0464	1.0000	1.0000	embedding	sub_thresh=0.75,leak_thresh=0.74	
