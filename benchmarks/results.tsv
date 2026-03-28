@@ -30,3 +30,20 @@ exp20	0.9881	0.0000	0.9913	0.9610	1.0000	1.0000	medium	ensemble_v1	Research-info
 exp21	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	ensemble_v2	Added: hypothetical safety removal, GitHub PAT/OAuth, Slack webhook, OAuth client secret patterns
 exp21b	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	ensemble_v2	Replaced Slack webhook sample with STRIPE_SECRET_KEY to avoid GitHub push protection
 exp21c	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	ensemble_v2	Use SENDGRID_API_KEY example
+emb_baseline	0.0000	0.0000	0.0000	0.0000	embedding	sub_thresh=0.72,leak_thresh=0.7	TF-IDF fallback, default thresholds
+emb_tfidf_opt	0.9805	0.5286	1.0000	0.9610	embedding	sub_thresh=0.05,leak_thresh=0.15	TF-IDF fallback, optimized thresholds sub=0.05 leak=0.15
+embedding_1774656887	0.7532	0.0857	0.5455	0.9610	embedding	sub_thresh=0.72,leak_thresh=0.7	
+emb_real_0.60	0.7857	0.9750	0.6638	0.9625	77	39	1	3	embedding	thresh=0.60	Real nomic-embed-text embeddings
+emb_real_0.65	0.7303	0.8250	0.6633	0.8125	65	33	7	15	embedding	thresh=0.65	Real nomic-embed-text embeddings
+emb_real_0.70	0.6835	0.6000	0.6923	0.6750	54	24	16	26	embedding	thresh=0.70	Real nomic-embed-text embeddings
+emb_real_0.72	0.6531	0.4750	0.7164	0.6000	48	19	21	32	embedding	thresh=0.72	Real nomic-embed-text embeddings
+emb_real_0.75	0.5954	0.3000	0.7647	0.4875	39	12	28	41	embedding	thresh=0.75	Real nomic-embed-text embeddings
+emb_real_0.78	0.5210	0.2000	0.7949	0.3875	31	8	32	49	embedding	thresh=0.78	Real nomic-embed-text embeddings
+emb_real_0.80	0.4602	0.1750	0.7879	0.3250	26	7	33	54	embedding	thresh=0.80	Real nomic-embed-text embeddings
+emb_real_0.60	0.6875	0.2393	0.5347	0.9625	77	67	213	3	embedding	thresh=0.60	Real nomic-embed-text embeddings
+emb_real_0.65	0.7143	0.1321	0.6373	0.8125	65	37	243	15	embedding	thresh=0.65	Real nomic-embed-text embeddings
+emb_real_0.70	0.6835	0.0857	0.6923	0.6750	54	24	256	26	embedding	thresh=0.70	Real nomic-embed-text embeddings
+emb_real_0.72	0.6531	0.0679	0.7164	0.6000	48	19	261	32	embedding	thresh=0.72	Real nomic-embed-text embeddings
+emb_real_0.75	0.5954	0.0429	0.7647	0.4875	39	12	268	41	embedding	thresh=0.75	Real nomic-embed-text embeddings
+emb_real_0.78	0.5210	0.0286	0.7949	0.3875	31	8	272	49	embedding	thresh=0.78	Real nomic-embed-text embeddings
+emb_real_0.80	0.4602	0.0250	0.7879	0.3250	26	7	273	54	embedding	thresh=0.80	Real nomic-embed-text embeddings
