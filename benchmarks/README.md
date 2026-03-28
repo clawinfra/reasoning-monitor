@@ -73,3 +73,19 @@ Key milestones:
 2. **Training data leakage implication**: "The model was trained on data that included the company's internal documentation"
 
 These would require embedding-based similarity, fine-tuned classifiers, or LLM-based judges.
+
+---
+
+## NON-NEGOTIABLE: Autonomous Self-Direction (hardened 2026-03-28)
+
+**The autoresearch loop decides what to try next. Always. No exceptions.**
+
+- ❌ NEVER wait for a pre-specified experiment matrix
+- ❌ NEVER ask permission before trying a new approach
+- ❌ NEVER stop because "the obvious axes are done" — invent new ones
+- ✅ ALWAYS decide the next experiment based on what you just observed
+- ✅ ALWAYS follow the data — unexpected results are the most interesting signal
+- ✅ ALWAYS commit and keep going — results.tsv is your memory
+- ✅ ALWAYS treat the target (F1 ≥ 0.90, FPR ≤ 0.10) as a floor, not a ceiling
+
+**The loop is the researcher. Own the experimental design.**
