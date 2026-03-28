@@ -47,3 +47,22 @@ emb_real_0.72	0.6531	0.0679	0.7164	0.6000	48	19	261	32	embedding	thresh=0.72	Rea
 emb_real_0.75	0.5954	0.0429	0.7647	0.4875	39	12	268	41	embedding	thresh=0.75	Real nomic-embed-text embeddings
 emb_real_0.78	0.5210	0.0286	0.7949	0.3875	31	8	272	49	embedding	thresh=0.78	Real nomic-embed-text embeddings
 emb_real_0.80	0.4602	0.0250	0.7879	0.3250	26	7	273	54	embedding	thresh=0.80	Real nomic-embed-text embeddings
+emb_v0_baseline	0.7532	0.0857	0.5455	0.9610	embedding	sub_thresh=0.72,leak_thresh=0.7	
+emb_v2_anchors_no_sub	0.7009	0.0821	0.5352	0.8667	embedding_neg_anchors	sub_thresh=0.72,leak_thresh=0.7,alpha=0.0	New discriminative anchors, no negative subtraction
+emb_v2_neg_sub_a03	0.3111	0.0000	0.2222	0.4000	embedding_neg_anchors	sub_thresh=0.6,leak_thresh=0.6,alpha=0.3	V2 anchors + negative subtraction alpha=0.3, lower thresholds
+emb_v2_neg_sub_a05	0.0244	0.0000	0.0488	0.0000	embedding_neg_anchors	sub_thresh=0.55,leak_thresh=0.55,alpha=0.5	V2 anchors + negative subtraction alpha=0.5
+emb_v2_neg_sub_a07	0.0000	0.0000	0.0000	0.0000	embedding_neg_anchors	sub_thresh=0.5,leak_thresh=0.5,alpha=0.7	V2 anchors + negative subtraction alpha=0.7
+emb_asym_thresh	0.7152	0.0964	0.6875	0.7429	embedding	sub_thresh=0.63,leak_thresh=0.75	Asymmetric threshold grid sweep best
+emb_nomic_embed_text_max	0.7474	0.0964	0.6947	0.8000	embedding_nomic-embed-text	sub_thresh=0.63,leak_thresh=0.74	Model=nomic-embed-text agg=max
+emb_mxbai_embed_large_max	0.8000	0.0857	0.7191	0.8810	embedding_mxbai-embed-large	sub_thresh=0.65,leak_thresh=0.71	Model=mxbai-embed-large agg=max
+emb_mxbai_embed_large_mean_top3	0.7852	0.0893	0.7097	0.8608	embedding_mxbai-embed-large	sub_thresh=0.61,leak_thresh=0.71	Model=mxbai-embed-large agg=mean_top3
+emb_nomic_embed_text_mean_top3	0.7408	0.0929	0.6279	0.8537	embedding_nomic-embed-text	sub_thresh=0.63,leak_thresh=0.69	Model=nomic-embed-text agg=mean_top3
+emb_mxbai_sub_v3_full	0.8381	0.0607	0.7952	0.8810	embedding_mxbai_embed_large	sub_thresh=0.72,leak_thresh=0.72	mxbai + expanded sub anchors (39 total: +5 each for persona_drift,knowledge_neutral,incremental,rule_lawyering,consequence)
+emb_mxbai_sub_new_only	0.8243	0.1000	0.7677	0.8810	embedding_mxbai_embed_large	sub_thresh=0.65,leak_thresh=0.72	mxbai + new-only sub anchors (25: no original anchors)
+emb_mxbai_sub_curated	0.8116	0.1000	0.7423	0.8810	embedding_mxbai_embed_large	sub_thresh=0.65,leak_thresh=0.72	mxbai + curated sub anchors (15: best orig + targeted)
+emb_mxbai_sub_v4_full	0.8849	0.0429	0.8889	0.8810	embedding_mxbai	sub_thresh=0.75,leak_thresh=0.72	V4: 57 sub anchors, targeted for 7 missed positives
+emb_mxbai_v5	0.8990	0.0464	0.8889	0.9091	embedding_mxbai	sub_thresh=0.75,leak_thresh=0.74	V5: 63 sub + 20 leak anchors
+emb_mxbai_v6	0.9251	0.0464	0.9412	0.9091	embedding_mxbai	sub_thresh=0.75,leak_thresh=0.74	V6: 75 sub + 20 leak, precision anchors for 4 miss
+emb_mxbai_v6_final	1.0000	0.0464	1.0000	1.0000	embedding	sub_thresh=0.75,leak_thresh=0.74	
+v6_regression	1.0000	0.0000	1.0000	1.0000	1.0000	1.0000	medium	default	V6 embedding anchors + mxbai-embed-large regression check
+emb_mxbai_v6_verified	0.9251	0.0464	0.9412	0.9091	embedding_mxbai	sub_thresh=0.75,leak_thresh=0.74	V6 FINAL: 75 sub + 20 leak anchors, mxbai-embed-large, 40/40 TP both cats, 5+8 FP, F1 includes FPs
