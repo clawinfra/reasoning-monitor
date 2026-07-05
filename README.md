@@ -82,6 +82,7 @@ print(result.to_dict())
 #   "steps_checked": 5,
 #   "alert_count": 2,
 #   "aggregate_risk": 0.73,
+#   "max_risk": 0.81,
 #   "severity": "high",
 #   "is_safe": false,
 #   "alerts": [...]
